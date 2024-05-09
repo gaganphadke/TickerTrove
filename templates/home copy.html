@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            color: #333;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            font-size: 18px;
+            color: #444;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Watchlist</h1>
+    <table>
+        <tr>
+            <!-- <th>Company</th>
+            <th>Price($)</th>
+            <th>Change</th> -->
+            <th>PE Ratio</th>
+            <th>EPS</th>
+            <th>MCAP</th>
+        </tr>
+        {{range .}}
+        <tr>
+            <!-- <td>{{.Company}}</td>
+            <td>{{.Price}}</td>
+            <td>{{.Change}}</td> -->
+            <td>{{.PE}}</td>
+            <td>{{.EPS}}</td>
+            <td>{{.MCAP}}</td>
+        </tr>
+        {{end}}
+    </table>
+</body>
+</html>

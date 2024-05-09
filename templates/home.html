@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style="color: blue;">StockIt</title>
+    <style>
+        .nav {
+            position: sticky;
+            top: 0;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0053f8; 
+            text-decoration: none;
+            animation: fadeIn 1s ease-in-out; 
+            text-align: center;
+            justify-content: center;
+            font: bold;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            animation: slideInFromLeft 1s ease-in-out; 
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #eedddd; 
+            font-weight: bold;
+            color: #333333;
+            text-transform: uppercase; 
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2; 
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #e0e0e0; 
+        }
+    </style>
+</head>
+<body>
+
+   <nav class="nav"> <h1 class="company-name">Stock Information</h1></nav>
+    <!-- <h3>Stock Data</h3> -->
+    <table id="stockData">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Price($)</th>
+                <th>Change</th>
+                <th>PE</th>
+                <th>EPS</th>
+                <th>Market Cap</th>
+            </tr>
+        </thead>
+        <tbody id="stockDataBody">
+        </tbody>
+    </table>
+
+    <script>
+        function fetchStockData() {
+            fetch('/stockdata')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('stockDataBody').innerHTML = '';
+                data.forEach(stock => {
+                    let row = `<tr>
+                        <td>${stock.company}</td>
+                        <td>${stock.price}</td>
+                        <td>${stock.change}</td>
+                        <td>${stock.pe}</td>
+                        <td>${stock.eps}</td>
+                        <td>${stock.mcap}</td>
+                    </tr>`;
+                    document.getElementById('stockDataBody').innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Error fetching stock data:', error));
+        }
+
+        window.onload = fetchStockData;
+    </script>
+</body>
+</html>
